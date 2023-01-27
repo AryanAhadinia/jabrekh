@@ -178,4 +178,53 @@ class Assignment(models.Model):
     )
 
     def __str__(self):
-        return f"Assignment {self.title} @ {str(self.session)}"
+        return f"Assignment {self.title} @ {str(self.semester)}"
+
+
+class Submission(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    delay = models.IntegerField()
+
+    class Meta:
+        unique_together = ("person", "assignment")
+
+    def __str__(self):
+        return f"Submission {str(self.person)} for {str(self.assignment)}"
+
+
+class Question(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    question_identifier = models.CharField(max_length=100)
+
+
+class Grade(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    grade = models.IntegerField()
+
+    class Meta:
+        unique_together = ("person", "question")
+
+    def __str__(self):
+        return f"Grade {str(self.question)} for {str(self.person.employee_id)}"
+
+
+class Objection(models.Model):
+    STATE_CHOICES = (
+        (0, "Created"),
+        (1, "Accepted"),
+        (2, "Rejected"),
+    )
+
+    state = models.IntegerField(choices=STATE_CHOICES, default=0)
+    grade = models.ForeignKey(Grade, on_delete=models.CASCADE)
+    current_grade = models.IntegerField()
+    objection_text = models.TextField()
+    response_text = models.TextField(blank=True)
+
+    class Meta:
+        unique_together = ("person", "question")
+
+    def __str__(self):
+        return f"Objection @ {str(self.grade)}"

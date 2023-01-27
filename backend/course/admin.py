@@ -11,6 +11,10 @@ from .models import (
     URLMaterial,
     Session,
     Assignment,
+    Submission,
+    Question,
+    Grade,
+    Objection
 )
 
 
@@ -24,3 +28,7 @@ admin.site.register(FileMaterial)
 admin.site.register(URLMaterial)
 admin.site.register(Session)
 admin.site.register(Assignment)
+admin.site.register(Submission)
+admin.site.register(Question)
+admin.site.register(Grade)
+admin.site.register(Objection)

@@ -21,6 +21,7 @@ docker-compose -f docker-compose.prod.yml exec web python manage.py collectstati
 ## References
 
 - <https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/>
+- <https://mherman.org/blog/dockerizing-a-reac>
 
 ## TODOs
 

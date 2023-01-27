@@ -19,6 +19,5 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env.dev.db
-
 volumes:
   postgres_data:
